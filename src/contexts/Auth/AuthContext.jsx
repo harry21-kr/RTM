@@ -19,42 +19,42 @@ export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   async function handleSignIn(email, password) {
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password
-      });
-      if (error) throw new Error(error);
-      setIsLoggedIn(true);
-      setUser(data.user);
-    } catch (error) {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password
+    });
+
+    if (error) {
       throw new Error(error);
     }
+
+    setIsLoggedIn(true);
+    setUser(data.user);
   }
 
   async function handleLogin(email, password) {
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-      if (error) throw new Error(error);
-      setIsLoggedIn(true);
-      setUser(data.user);
-    } catch (error) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
       throw new Error(error);
     }
+
+    setIsLoggedIn(true);
+    setUser(data.user);
   }
 
   async function handleLogout() {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw new Error(error);
-      setIsLoggedIn(false);
-      setUser(null);
-    } catch (error) {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
       throw new Error(error);
     }
+
+    setIsLoggedIn(false);
+    setUser(null);
   }
 
   return (
