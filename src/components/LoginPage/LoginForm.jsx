@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuth } from '../../contexts/Auth/hooks';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const { handleLogin, isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <StLoginForm>
@@ -23,13 +35,20 @@ export function LoginForm() {
       </StInputWrapper>
       <StButtonWrapper>
         <StButton $backgroundColor="#868686">Sign up</StButton>
-        <StButton $backgroundColor="#000000">Login</StButton>
+        <StButton
+          $backgroundColor="#000000"
+          onClick={() => {
+            handleLogin(email, password);
+          }}
+        >
+          Login
+        </StButton>
       </StButtonWrapper>
     </StLoginForm>
   );
 }
 
-const StLoginForm = styled.form`
+const StLoginForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 104px;
