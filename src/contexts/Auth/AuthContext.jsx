@@ -4,7 +4,10 @@ import { VITE_SUPABASE_KEY, VITE_SUPABASE_URL } from '../../config/constants';
 
 const initialValue = {
   isLoggedIn: false,
-  user: null
+  user: null,
+  handleLogin: () => {},
+  handleLogout: () => {},
+  handleSignIn: () => {}
 };
 
 export const AuthContext = createContext(initialValue);
