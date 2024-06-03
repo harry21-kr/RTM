@@ -48,7 +48,6 @@ export default function Profile() {
 
 const StProfile = styled.div`
   display: grid;
-  /* grid-template-rows: auto auto auto; */
   align-items: center;
   justify-items: center;
   text-align: center;
