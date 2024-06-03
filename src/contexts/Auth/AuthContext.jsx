@@ -1,65 +1,32 @@
 import { createClient } from '@supabase/supabase-js';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { VITE_SUPABASE_KEY, VITE_SUPABASE_URL } from '../../config/constants';
 
 const initialValue = {
-  isLoggedIn: false,
-  user: null,
-  handleLogin: () => {},
-  handleLogout: () => {},
-  handleSignIn: () => {}
+  session: null,
+  supabase: null
 };
 
 export const AuthContext = createContext(initialValue);
 
-const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_KEY);
+const supabaseClient = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_KEY);
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [session, setSession] = useState(null);
 
-  async function handleSignIn(email, password) {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password
+  useEffect(() => {
+    supabaseClient.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
     });
 
-    if (error) {
-      throw new Error(error);
-    }
-
-    setIsLoggedIn(true);
-    setUser(data.user);
-  }
-
-  async function handleLogin(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password
+    const {
+      data: { subscription }
+    } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
     });
 
-    if (error) {
-      throw new Error(error);
-    }
+    return () => subscription.unsubscribe();
+  }, []);
 
-    setIsLoggedIn(true);
-    setUser(data.user);
-  }
-
-  async function handleLogout() {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      throw new Error(error);
-    }
-
-    setIsLoggedIn(false);
-    setUser(null);
-  }
-
-  return (
-    <AuthContext.Provider value={{ user, isLoggedIn, handleLogin, handleLogout, handleSignIn }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ session, supabaseClient }}>{children}</AuthContext.Provider>;
 }
