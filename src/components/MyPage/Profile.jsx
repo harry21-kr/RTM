@@ -45,10 +45,7 @@ export default function Profile() {
     } = supabaseClient.storage.from('profile').getPublicUrl(data.path);
 
     // 데이터베이스에 imageUrl 저장
-    const { error: updateError } = await supabaseClient
-      .from('users')
-      .update({ profileImgURL: publicUrl })
-      .eq('id', user.id);
+    await supabaseClient.from('users').update({ profileImgURL: publicUrl }).eq('id', user.id);
 
     setProfileUrl(publicUrl); // 상태를 업데이트하여 프로필 이미지 URL을 설정
   }
