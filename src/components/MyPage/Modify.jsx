@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../../contexts/Auth/hooks';
 
 export default function Modify() {
+  const { supabaseClient, user } = useAuth();
+
   return (
     <StModify>
       <Label>Name</Label>
