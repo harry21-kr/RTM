@@ -1,4 +1,5 @@
 import { useAuth } from '../../contexts/Auth/hooks';
+import WriteHeader from '../../components/Header/Write';
 
 export default function WritePage() {
   const { supabaseClient, session } = useAuth();
@@ -14,6 +15,8 @@ export default function WritePage() {
   }
 
   return (
+    <>
+    <WriteHeader />
     <div>
       <form>
         <button
@@ -26,5 +29,6 @@ export default function WritePage() {
         </button>
       </form>
     </div>
+    </>
   );
 }
