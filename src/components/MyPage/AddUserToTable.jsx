@@ -1,8 +1,13 @@
-export async function addUserToTable(supabaseClient, user) {
+export async function addUserToTable(supabaseClient, user, password) {
   const { error } = await supabaseClient.from('users').insert([
     {
       id: user.id,
-      email: user.email
+      password: password,
+      email: user.email,
+      profileImgURL: 'https://fiupbivkgjqqvpwaacik.supabase.co/storage/v1/object/public/profile/default-profile.png',
+      comment: '한줄 코멘트를 작성해주세요!',
+      name: user.user_metadata.userName,
+      siteName: `${user.user_metadata.userName}의 기록`
     }
   ]);
 
