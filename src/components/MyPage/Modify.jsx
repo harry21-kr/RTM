@@ -63,40 +63,58 @@ export default function Modify() {
   return (
     <StModify>
       <Label>Name</Label>
-      <input type="text" ref={nameRef} />
+      <Stinput type="text" ref={nameRef} />
       <Label>SiteName</Label>
-      <input type="text" ref={siteNameRef} />
+      <Stinput type="text" ref={siteNameRef} />
       <Label>Comment</Label>
-      <input type="text" ref={commentRef} />
+      <Stinput type="text" ref={commentRef} />
       <Label>Email</Label>
-      <input type="email" ref={emailRef} />
+      <Stinput type="email" ref={emailRef} />
       <Label>PW</Label>
-      <input type="password" ref={passwordRef} />
-      <ModifyButton onClick={handleModify}>수정하기</ModifyButton>
+      <Stinput type="password" ref={passwordRef} />
+      <StModifyButton onClick={handleModify}>수정하기</StModifyButton>
     </StModify>
   );
 }
 
 const StModify = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 2fr 8fr;
   grid-template-rows: repeat(6, 1fr);
-  grid-gap: 10px;
-  width: 20rem;
+  width: 25rem;
   border: solid 1px black;
   position: relative;
+  font-size: 1rem;
+  gap: 3px;
+  background-color: #faf2e891;
 `;
 
 const Label = styled.p`
   grid-column: 1;
-  margin: 10px;
-  border-right: 1px solid #ccc;
-  padding-left: 10px;
+  text-align: center;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  align-content: center;
+  padding: 10px;
 `;
 
-const ModifyButton = styled.button`
+const StModifyButton = styled.button`
   grid-row: 6;
-  grid-column: 1 / 3;
+  grid-column: 1/3;
   justify-self: center;
-  margin: 5px;
+  margin: 3px;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
+`;
+
+const Stinput = styled.input`
+  padding: 10px;
+  border: 0;
+  font-size: 1rem;
+  border-bottom: 1px solid;
 `;

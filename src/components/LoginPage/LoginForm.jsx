@@ -28,7 +28,7 @@ export function LoginForm() {
     } else if (data) {
       alert('성공적으로 회원가입 되었습니다!');
       console.log(data);
-      await addUserToTable(supabaseClient, data.user, password); // user 객체에서 id 사용
+      await addUserToTable(supabaseClient, data.user, password); // user 객체에서 id 사용, password 넘겨주기
     }
   }
 
