@@ -14,7 +14,15 @@ export default function Modify() {
       const email = emailRef.current.value;
       const comment = commentRef.current.value;
       await supabaseClient.from('users').update({ email, comment }).eq('id', user.id);
+
+      await updateEmail(email);
     }
+  };
+
+  // 유저 아이디(이메일) 업데이트
+  const updateEmail = async (newEmail) => {
+    const { error } = await supabaseClient.auth.updateUser({ email: newEmail });
+    if (error) console.log(error.message);
   };
 
   // 마운트될때 user 데이터 가져오기
@@ -37,12 +45,12 @@ export default function Modify() {
       <input type="text" />
       <Label>SiteName</Label>
       <input type="text" />
+      <Label>Comment</Label>
+      <input type="text" ref={commentRef} />
       <Label>Email</Label>
       <input type="email" ref={emailRef} />
       <Label>PW</Label>
       <input type="password" />
-      <Label>Comment</Label>
-      <input type="text" ref={commentRef} />
       <ModifyButton onClick={handleModify}>수정하기</ModifyButton>
     </StModify>
   );
