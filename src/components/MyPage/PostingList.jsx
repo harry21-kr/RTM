@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/Auth/hooks';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { initPosts } from '../../Redux/Slices/PostsSlice';
 
 export function PostingList() {
-  const { supabaseClient, user } = useAuth();
-  const [postData, setPostData] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.posts);
+  const { user, supabaseClient } = useAuth();
 
-  // 마운트 될때 posts 데이터 가져오기
   useEffect(() => {
     const fetchPostsData = async () => {
       if (user) {
@@ -14,17 +16,21 @@ export function PostingList() {
           .from('posts')
           .select('id, UID, title, content, created_at, img_url')
           .eq('UID', user.user_metadata.userName);
-
-        setPostData(fetchPostsData);
+        dispatch(initPosts(fetchPostsData));
       }
     };
+
     fetchPostsData();
   }, [user, supabaseClient]);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
 
   return (
     <>
       <StListWrap>
-        {postData.map((post) => (
+        {posts.map((post) => (
           <StPostItem key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.content}</p>
