@@ -8,7 +8,6 @@ export default function Profile() {
   const [profileUrl, setProfileUrl] = useState(
     'https://fiupbivkgjqqvpwaacik.supabase.co/storage/v1/object/public/profile/default-profile.png'
   );
-  const [buttonText, setButtonText] = useState('Select Image');
   const [profileFile, setProfileFile] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -18,7 +17,6 @@ export default function Profile() {
 
     if (data && data.profileImgURL) {
       setProfileUrl(data.profileImgURL);
-      setButtonText('Modify Image');
     }
   }
 
@@ -58,7 +56,6 @@ export default function Profile() {
 
   return (
     <StProfile>
-      <p>Profile</p>
       <StProfileImage src={profileUrl} alt="Profile Image" />
       <StInputImage
         ref={fileInputRef}
@@ -67,7 +64,7 @@ export default function Profile() {
         onChange={handleFileInputChange}
         style={{ display: 'none' }}
       />
-      <button onClick={() => fileInputRef.current.click()}>{buttonText}</button>
+      <StProfileButton onClick={() => fileInputRef.current.click()}>Edit profile image</StProfileButton>
     </StProfile>
   );
 }
@@ -81,12 +78,20 @@ const StProfile = styled.div`
 `;
 
 const StProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   margin-bottom: 10px;
 `;
 
 const StInputImage = styled.input`
   display: none;
+`;
+
+const StProfileButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  color: #0d99ff;
+  font-weight: 600;
+  cursor: pointer;
 `;

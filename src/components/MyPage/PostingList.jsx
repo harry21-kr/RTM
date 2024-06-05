@@ -1,41 +1,15 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useAuth } from '../../contexts/Auth/hooks';
-import { useModal } from '../../contexts/Modal/useModal';
-import PostModal from '../Modal/PostModal';
 
 export function PostingList() {
-  const { supabaseClient, user } = useAuth();
-  const [postData, setPostData] = useState([]);
-  const [selectedPostData, setSelectedPostData] = useState({});
-  const [openModal] = useModal(<PostModal data={selectedPostData} />);
+  const posts = useSelector((state) => state.posts.posts);
 
-  // 마운트 될때 posts 데이터 가져오기
-  useEffect(() => {
-    const fetchPostsData = async () => {
-      if (user) {
-        const { data: fetchPostsData } = await supabaseClient
-          .from('posts')
-          .select('id, UID, title, content, created_at, img_url')
-          .eq('UID', user.user_metadata.userName);
-
-        setPostData(fetchPostsData);
-      }
-    };
-    fetchPostsData();
-  }, [user, supabaseClient]);
+  UseFetchPosts(); // 커스텀 훅 호출
 
   return (
     <>
       <StListWrap>
-        {postData.map((post) => (
-          <StPostItem
-            key={post.id}
-            onClick={() => {
-              setSelectedPostData(post);
-              openModal();
-            }}
-          >
+        {posts.map((post) => (
+          <StPostItem key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.content}</p>
             <img src={post.img_url} alt="post image"></img>
