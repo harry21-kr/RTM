@@ -1,3 +1,4 @@
+import MyPageHeader from '../../components/Header/MyPage';
 import React from 'react';
 import Profile from '../../components/MyPage/Profile';
 import Modify from '../../components/MyPage/Modify';
@@ -7,7 +8,7 @@ import { PostingList } from '../../components/MyPage/PostingList';
 export default function MyPage() {
   return (
     <>
-      <h1>MyPage</h1>
+      <MyPageHeader />
       <StMypageWrapper>
         <StMypageTopWrap>
           <Profile />
