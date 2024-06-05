@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
-import { useModal } from '../../contexts/Modal/useModal';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../Redux/Slices/PostModalSlice';
 
 export default function PostModal() {
   const [postTitle, setPostTitle] = useState('');
@@ -9,7 +10,7 @@ export default function PostModal() {
   const [postImgFile, setPostImgFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
 
-  const [_, closeModal] = useModal();
+  const dispatch = useDispatch();
   const { session, supabaseClient } = useAuth();
 
   const handleImageChange = (event) => {
@@ -45,7 +46,7 @@ export default function PostModal() {
     }
 
     alert('포스팅 완료!');
-    closeModal();
+    dispatch(closeModal());
   }
 
   return (
@@ -73,7 +74,7 @@ export default function PostModal() {
         onChange={(e) => setPostContent(e.target.value)}
       />
       <button type="submit">포스팅하기</button>
-      <button onClick={closeModal}>모달창 닫기</button>
+      <button onClick={() => dispatch(closeModal())}>모달창 닫기</button>
     </StFormWrapper>
   );
 }

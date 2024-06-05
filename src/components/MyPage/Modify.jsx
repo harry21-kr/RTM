@@ -2,8 +2,9 @@ import React from 'react';
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
-import { useModal } from '../../contexts/Modal/useModal';
 import PostModal from '../Modal/PostModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, openModal } from '../../Redux/Slices/PostModalSlice';
 
 export default function Modify() {
   const { supabaseClient, user } = useAuth();
@@ -12,7 +13,8 @@ export default function Modify() {
   const commentRef = useRef('');
   const nameRef = useRef('');
   const siteNameRef = useRef('');
-  const [openModal, closeModal] = useModal(<PostModal />);
+  const dispatch = useDispatch();
+  const modalOpen = useSelector((state) => state.modal.isOpen);
 
   // 데이터 수정하기
   const handleModify = async () => {
@@ -76,7 +78,13 @@ export default function Modify() {
       <Label>PW</Label>
       <Stinput type="password" ref={passwordRef} />
       <StModifyButton onClick={handleModify}>수정하기</StModifyButton>
-      <button onClick={openModal}>눌러주세요</button>
+      <button onClick={() => dispatch(openModal())}>눌러주세요</button>
+      {modalOpen && (
+        <>
+          <PostModal />
+          <button onClick={() => dispatch(closeModal())}>Close Modal</button>
+        </>
+      )}
     </StModify>
   );
 }
