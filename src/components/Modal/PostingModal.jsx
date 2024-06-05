@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { addPosts } from '../../Redux/Slices/PostsSlice';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useModal } from '../../contexts/Modal/useModal';
 
@@ -12,6 +14,8 @@ export default function PostingModal() {
 
   const { session, supabaseClient } = useAuth();
   const [_, closeModal] = useModal();
+
+  const dispatch = useDispatch();
 
   const handleImageChange = (event) => {
     const fileObj = event.target.files[0];
@@ -34,18 +38,21 @@ export default function PostingModal() {
       data: { publicUrl }
     } = supabaseClient.storage.from('posts').getPublicUrl(imgData.path);
 
-    const { error } = await supabaseClient.from('posts').insert({
+    const newPost = {
       id: uuidv4(),
       UID: session.user.user_metadata.userName,
       title: postTitle,
       content: postContent,
       img_url: publicUrl
-    });
+    };
+
+    const { error } = await supabaseClient.from('posts').insert(newPost);
 
     if (error) {
       throw new Error(error);
     }
 
+    dispatch(addPosts(newPost));
     alert('포스팅 완료!');
     closeModal();
   }
