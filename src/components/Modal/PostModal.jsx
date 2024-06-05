@@ -50,58 +50,74 @@ export default function PostModal() {
   }
 
   return (
-    <StFormWrapper onSubmit={handlePost}>
-      <label htmlFor="postImage">
-        <StPrevImgWrapper>
-          {previewUrl ? (
-            <img src={previewUrl} alt="미리보기 이미지" width={360} height={180} />
-          ) : (
-            <p>이미지 가져오기</p>
-          )}
-        </StPrevImgWrapper>
-      </label>
-      <StFileInput type="file" id="postImage" accept="image/*" onChange={handleImageChange} />
-      <input
-        type="text"
-        value={postTitle}
-        placeholder="제목을 입력해주세요."
-        onChange={(e) => setPostTitle(e.target.value)}
-      />
-      <input
-        type="text"
-        value={postContent}
-        placeholder="간략한 소개글을 작성해주세요."
-        onChange={(e) => setPostContent(e.target.value)}
-      />
-      <button type="submit">포스팅하기</button>
-      <button onClick={() => dispatch(closeModal())}>모달창 닫기</button>
-    </StFormWrapper>
+    <StModalWrapper>
+      <StFormWrapper onSubmit={handlePost}>
+        <label htmlFor="postImage">
+          <StPrevImgWrapper>
+            {previewUrl ? (
+              <img src={previewUrl} alt="미리보기 이미지" width={360} height={180} />
+            ) : (
+              <p>이미지 가져오기</p>
+            )}
+          </StPrevImgWrapper>
+        </label>
+        <StFileInput type="file" id="postImage" accept="image/*" onChange={handleImageChange} />
+        <input
+          type="text"
+          value={postTitle}
+          placeholder="제목을 입력해주세요."
+          onChange={(e) => setPostTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          value={postContent}
+          placeholder="간략한 소개글을 작성해주세요."
+          onChange={(e) => setPostContent(e.target.value)}
+        />
+        <button type="submit">포스팅하기</button>
+        <button onClick={() => dispatch(closeModal())}>모달창 닫기</button>
+      </StFormWrapper>
+    </StModalWrapper>
   );
 }
+
+const StModalWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 600px; /* 예시 크기 */
+  height: 400px; /* 예시 크기 */
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+`;
 
 const StFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  background-color: white;
-  padding: 24px;
-  border-radius: 8px;
+  gap: 20px;
+  background-color: #f8f9fa;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const StPrevImgWrapper = styled.div`
-  width: 360px;
-  height: 180px;
+  width: 400px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
-
+  border-radius: 8px;
   transition: all 0.2s ease-in-out;
-
   &:hover {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 `;
 
