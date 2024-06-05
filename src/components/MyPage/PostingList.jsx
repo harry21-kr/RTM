@@ -1,31 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/Auth/hooks';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { initPosts } from '../../Redux/Slices/PostsSlice';
+import UseFetchPosts from './hooks/UseFetchPosts';
+import { useSelector } from 'react-redux';
 
 export function PostingList() {
-  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
-  const { user, supabaseClient } = useAuth();
 
-  useEffect(() => {
-    const fetchPostsData = async () => {
-      if (user) {
-        const { data: fetchPostsData } = await supabaseClient
-          .from('posts')
-          .select('id, UID, title, content, created_at, img_url')
-          .eq('UID', user.user_metadata.userName);
-        dispatch(initPosts(fetchPostsData));
-      }
-    };
-
-    fetchPostsData();
-  }, [user, supabaseClient]);
-
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+  UseFetchPosts(); // 커스텀 훅 호출
 
   return (
     <>
