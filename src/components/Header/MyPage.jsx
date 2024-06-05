@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useNavigate } from 'react-router-dom';
@@ -22,9 +22,9 @@ const Title = styled.p`
 `;
 
 const SubTitle = styled.p`
-font-size: 12px;
+font-size: 16px;
 position: absolute;
-left: 140px;
+left: 145px;
 bottom: 15px;
 color: gray;
 `;
@@ -76,32 +76,80 @@ const Profile = styled.div`
 `;
 
 const MyPageHeader = () => {
+    const [profile, setProfile] = useState();
+    const [subtitle, setSubTitle] = useState();
+    const [maintitle, setMainTitle] = useState();
     const { supabaseClient } = useAuth();
     const navigate = useNavigate();
+
     const logOut = async () => {
         const { error } = await supabaseClient.auth.signOut();
         alert('로그아웃 되었습니다');
         navigate('/login');
     };
 
-    const getSession = async () => {
-        const session = await supabaseClient.auth.getSession();
-    }
 
-    
+    // 뱃지 사진
+    useEffect(() => {
+        const fetchData = async () => {
+            // 1. 현재 로그인되어있는 세션을 받아온다 
+            const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+            const userId = sessionData.session.user.id 
+
+            // 2.  유저테이블에서 모든 칼럼을 가져와 id를 비교하여 userData에 넣는다
+            const { data: userData, error: userError } = await supabaseClient.from("users").select().eq("id", userId);
+            const imageUrl = userData[0].profileImgURL;
+
+            // 3. profile에 이미지 넣기. 어디에?? ==> state에
+            setProfile(imageUrl);
+        };
+        fetchData();
+    }, [supabaseClient]);
+
+    // 헤더 코멘트 변경
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+            const userId = sessionData.session.user.id 
+
+            const { data: userData, error: userError } = await supabaseClient.from("users").select().eq("id", userId);
+            const WriteSubTitle = userData[0].comment;
+
+            setSubTitle(WriteSubTitle);
+        };
+        fetchData();
+    }, [supabaseClient])
+
+    // 타이틀 변경
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+            console.log('sessionData3 => ', sessionData);
+            const userId = sessionData.session.user.id 
+
+            const { data: userData, error: userError } = await supabaseClient.from("users").select().eq("id", userId);
+            console.log('셋 유저 데이터3 ==> ', userData);
+            const SiteTitle = userData[0].siteName;
+
+            setMainTitle(SiteTitle);
+        };
+        fetchData();
+    }, [supabaseClient])
 
     return (
         <StyledHeader>
             <Profile>
-                <img src='' alt="Profile" />
+                <img src={profile} alt="Profile" />
             </Profile>
-            <Title>My Page</Title>
-            <SubTitle>SubTitle Testing</SubTitle>
+            <Title>{maintitle}</Title>
+            <SubTitle>{subtitle}</SubTitle>
             <Btns>
                 <Button>Home</Button>
                 <Button onClick={logOut}>Logout</Button>
             </Btns>
+
         </StyledHeader>
+
     );
 }
 
