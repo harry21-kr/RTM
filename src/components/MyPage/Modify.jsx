@@ -2,6 +2,8 @@ import React from 'react';
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
+import { useModal } from '../../contexts/Modal/useModal';
+import PostModal from '../Modal/PostModal';
 
 export default function Modify() {
   const { supabaseClient, user } = useAuth();
@@ -10,6 +12,7 @@ export default function Modify() {
   const commentRef = useRef('');
   const nameRef = useRef('');
   const siteNameRef = useRef('');
+  const [openModal, closeModal] = useModal(<PostModal />);
 
   // 데이터 수정하기
   const handleModify = async () => {
@@ -73,6 +76,7 @@ export default function Modify() {
       <Label>PW</Label>
       <Stinput type="password" ref={passwordRef} />
       <StModifyButton onClick={handleModify}>수정하기</StModifyButton>
+      <button onClick={openModal}>눌러주세요</button>
     </StModify>
   );
 }
