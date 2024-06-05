@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/Auth/hooks';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../../contexts/Auth/hooks';
+import { useModal } from '../../contexts/Modal/useModal';
+import PostModal from '../Modal/PostModal';
 
 export function PostingList() {
   const { supabaseClient, user } = useAuth();
   const [postData, setPostData] = useState([]);
+  const [selectedPostData, setSelectedPostData] = useState({});
+  const [openModal] = useModal(<PostModal data={selectedPostData} />);
 
   // 마운트 될때 posts 데이터 가져오기
   useEffect(() => {
@@ -25,7 +29,13 @@ export function PostingList() {
     <>
       <StListWrap>
         {postData.map((post) => (
-          <StPostItem key={post.id}>
+          <StPostItem
+            key={post.id}
+            onClick={() => {
+              setSelectedPostData(post);
+              openModal();
+            }}
+          >
             <h3>{post.title}</h3>
             <p>{post.content}</p>
             <img src={post.img_url} alt="post image"></img>

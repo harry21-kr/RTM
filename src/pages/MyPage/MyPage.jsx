@@ -1,9 +1,8 @@
-import MyPageHeader from '../../components/Header/MyPage';
-import React from 'react';
-import Profile from '../../components/MyPage/Profile';
-import Modify from '../../components/MyPage/Modify';
 import styled from 'styled-components';
+import MyPageHeader from '../../components/Header/MyPage';
+import Modify from '../../components/MyPage/Modify';
 import { PostingList } from '../../components/MyPage/PostingList';
+import Profile from '../../components/MyPage/Profile';
 
 export default function MyPage() {
   return (
