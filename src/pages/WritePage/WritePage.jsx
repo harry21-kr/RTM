@@ -1,3 +1,34 @@
+import { useAuth } from '../../contexts/Auth/hooks';
+import WriteHeader from '../../components/Header/Write';
+
 export default function WritePage() {
-  return <div>WritePage</div>;
+  const { supabaseClient, session } = useAuth();
+
+  async function handlePosting() {
+    const { error } = await supabaseClient
+      .from('posts')
+      .insert({ title: '아무 제목', content: '아무 내용', UID: session.user.id });
+
+    if (error) {
+      throw new Error(error);
+    }
+  }
+
+  return (
+    <>
+    <WriteHeader />
+    <div>
+      <form>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handlePosting();
+          }}
+        >
+          글 쓰기
+        </button>
+      </form>
+    </div>
+    </>
+  );
 }
