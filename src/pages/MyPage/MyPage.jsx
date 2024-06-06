@@ -1,9 +1,10 @@
-import styled from 'styled-components';
 import MyPageHeader from '../../components/Header/MyPage';
-import { Calendar } from '../../components/MyPage/Calendar';
-import Modify from '../../components/MyPage/Modify';
-import { PostingList } from '../../components/MyPage/PostingList';
+import React from 'react';
 import Profile from '../../components/MyPage/Profile';
+import Modify from '../../components/MyPage/Modify';
+import styled from 'styled-components';
+import { PostingList } from '../../components/MyPage/PostingList';
+import { Calendar } from '../../components/MyPage/Calendar';
 
 export default function MyPage() {
   return (
@@ -13,12 +14,12 @@ export default function MyPage() {
         <StMypageTopWrap>
           <LeftColumn>
             <Profile />
+          </LeftColumn>
+          <RightColumn>
+            {/* <Modify /> */}
             <StCalendarSection>
               <Calendar />
             </StCalendarSection>
-          </LeftColumn>
-          <RightColumn>
-            <Modify />
           </RightColumn>
         </StMypageTopWrap>
         <StPostingListTitle>Posting List</StPostingListTitle>
@@ -33,19 +34,20 @@ export default function MyPage() {
 const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  gap: 30px;
 `;
 
 const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 `;
 
 const StCalendarSection = styled.div`
-  width: 400px;
-  height: 150px;
+  width: 700px;
+  height: 200px;
   cursor: pointer;
 `;
 
@@ -57,7 +59,7 @@ const StMypageWrapper = styled.div`
 
 const StMypageTopWrap = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 6rem;
   align-items: center;
   justify-content: center;
   padding: 4rem;
