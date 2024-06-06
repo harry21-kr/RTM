@@ -81,8 +81,7 @@ const StModify = styled.div`
   display: grid;
   grid-template-columns: 2fr 8fr;
   grid-template-rows: repeat(6, 1fr);
-  width: 50rem;
-  height: 20rem;
+  width: 25rem;
   border: solid 1px black;
   position: relative;
   font-size: 1rem;

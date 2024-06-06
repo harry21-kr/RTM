@@ -91,10 +91,6 @@ const MyPageHeader = () => {
     navigate('/login');
   };
 
-  const handleModify = () => {
-    navigate('/ModifyPage');
-  };
-
   // 뱃지 사진
   useEffect(() => {
     const fetchData = async () => {
@@ -151,7 +147,6 @@ const MyPageHeader = () => {
       <SubTitle>{subtitle}</SubTitle>
       <Btns>
         <Button onClick={openModal}>Write</Button>
-        <Button onClick={handleModify}>Modify</Button>
         <Button onClick={logOut}>Logout</Button>
       </Btns>
     </StyledHeader>

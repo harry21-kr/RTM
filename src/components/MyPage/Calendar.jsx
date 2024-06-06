@@ -5,23 +5,9 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 export function Calendar() {
   const posts = UseFetchPosts();
   const [calendarData, setCalendarData] = useState([]);
-  const dateCount = {};
 
   useEffect(() => {
-    posts.forEach((post) => {
-      const date = post.created_at.split('T')[0];
-      if (dateCount[date]) {
-        dateCount[date] += 1;
-      } else {
-        dateCount[date] = 1;
-      }
-    });
-
-    const data = Object.keys(dateCount).map((date) => ({
-      day: date,
-      value: dateCount[date]
-    }));
-
+    const data = posts.map((post) => ({ day: post.created_at.split('T')[0], value: 1 }));
     setCalendarData(data);
   }, [posts]);
 
@@ -32,7 +18,7 @@ export function Calendar() {
       to="2024-12-31"
       emptyColor="#eeeeee"
       colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-      margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+      margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
       yearSpacing={40}
       monthBorderColor="#ffffff"
       monthLegendPosition="after"
@@ -44,7 +30,7 @@ export function Calendar() {
           direction: 'row',
           translateY: 36,
           itemCount: 4,
-          itemWidth: 4,
+          itemWidth: 42,
           itemHeight: 36,
           itemsSpacing: 14,
           itemDirection: 'right-to-left'
