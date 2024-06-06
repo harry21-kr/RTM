@@ -44,10 +44,10 @@
 ## 📝 와이어프레임
 
 - LogIn page
-  <img src="https://github.com/harry21-kr/RTM/assets/166012944/aa90f66b-9ef9-4583-9e82-f4064dea03b6" width="600" height="400">
+<img src="https://github.com/harry21-kr/RTM/assets/166012944/aa90f66b-9ef9-4583-9e82-f4064dea03b6" width="600" height="400">
 
 - My page
-  <img src="https://github.com/harry21-kr/RTM/assets/166012944/c2b6d859-a6d0-4ad3-a6e0-d4cccebb9326" width="600" height="600">
+<img src="https://github.com/harry21-kr/RTM/assets/166012944/c2b6d859-a6d0-4ad3-a6e0-d4cccebb9326" width="600" height="600">
 
 <br>
 
