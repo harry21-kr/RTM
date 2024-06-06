@@ -1,5 +1,5 @@
 import { useAuth } from '../../contexts/Auth/hooks';
-import WriteHeader from '../../components/Header/Write';
+import WriteHeader from '../../components/Header/Modify';
 
 export default function WritePage() {
   const { supabaseClient, session } = useAuth();
@@ -16,19 +16,19 @@ export default function WritePage() {
 
   return (
     <>
-    <WriteHeader />
-    <div>
-      <form>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            handlePosting();
-          }}
-        >
-          글 쓰기
-        </button>
-      </form>
-    </div>
+      <WriteHeader />
+      <div>
+        <form>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handlePosting();
+            }}
+          >
+            글 쓰기
+          </button>
+        </form>
+      </div>
     </>
   );
 }
