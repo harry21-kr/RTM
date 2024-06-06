@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
-import LoginHeader from '../Header/Login';
-import MyPageHeader from '../Header/MyPage';
 import { addUserToTable } from '../MyPage/AddUserToTable';
 
 export function LoginForm() {
@@ -57,61 +55,49 @@ export function LoginForm() {
   }, [session]);
 
   return (
-    <>
-      <FixHeader>
-        <LoginHeader />
-      </FixHeader>
-
-      <StFormWrapper>
-        <StInput
-          type="email"
-          placeholder="이메일을 입력해주세요."
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <StInput
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <StButton
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            if (mode === 'login') {
-              handleLogin(email, password);
-            } else if (mode === 'signUp') {
-              handleSignUp(email, password);
-            }
-          }}
-        >
-          {mode === 'login' && 'Login'}
-          {mode === 'signUp' && 'Sign up'}
-        </StButton>
-        <StText>
-          {mode === 'login' && (
-            <>
-              아직 회원가입을 하지 않으셨나요? <span onClick={() => setMode('signUp')}>회원가입 하기</span>
-            </>
-          )}
-          {mode === 'signUp' && (
-            <>
-              이미 회원이신가요? <span onClick={() => setMode('login')}>로그인하기</span>
-            </>
-          )}
-        </StText>
-        <StFailedText>{isFailedLogin && '아이디나 비밀번호를 다시 한번 확인해주세요.'}</StFailedText>
-      </StFormWrapper>
-    </>
+    <StFormWrapper>
+      <StInput
+        type="email"
+        placeholder="이메일을 입력해주세요."
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <StInput
+        type="password"
+        placeholder="비밀번호를 입력해주세요."
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <StButton
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          if (mode === 'login') {
+            handleLogin(email, password);
+          } else if (mode === 'signUp') {
+            handleSignUp(email, password);
+          }
+        }}
+      >
+        {mode === 'login' && 'Login'}
+        {mode === 'signUp' && 'Sign up'}
+      </StButton>
+      <StText>
+        {mode === 'login' && (
+          <>
+            아직 회원가입을 하지 않으셨나요? <span onClick={() => setMode('signUp')}>회원가입 하기</span>
+          </>
+        )}
+        {mode === 'signUp' && (
+          <>
+            이미 회원이신가요? <span onClick={() => setMode('login')}>로그인하기</span>
+          </>
+        )}
+      </StText>
+      <StFailedText>{isFailedLogin && '아이디나 비밀번호를 다시 한번 확인해주세요.'}</StFailedText>
+    </StFormWrapper>
   );
 }
-
-const FixHeader = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-`;
 
 const StFormWrapper = styled.form`
   display: flex;

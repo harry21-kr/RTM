@@ -1,14 +1,12 @@
-import MyPageHeader from "../../components/Header/MyPage";
 import React from 'react';
 import Profile from '../../components/MyPage/Profile';
 import Modify from '../../components/MyPage/Modify';
 import styled from 'styled-components';
 
 export default function MyPage() {
-  
   return (
     <>
-      <MyPageHeader />
+      <h1>MyPage</h1>
       <StMypageTopWrap>
         <Profile></Profile>
         <Modify></Modify>
