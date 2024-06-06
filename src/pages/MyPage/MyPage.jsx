@@ -1,4 +1,3 @@
-import { FaFacebook, FaFacebookMessenger, FaInstagram } from 'react-icons/fa';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MyPageHeader from '../../components/Header/MyPage';
@@ -23,6 +22,7 @@ export default function MyPage() {
             <Profile />
           </LeftColumn>
           <RightColumn>
+            {/* <Modify /> */}
             <StCalendarSection>
               <Calendar />
             </StCalendarSection>
@@ -31,45 +31,11 @@ export default function MyPage() {
         <StPostingListTitle>Posting List</StPostingListTitle>
         <StMypageBottomWrap>
           <PostingList />
-          <Footer>
-            {' '}
-            <Icon /> <Icon2 /> <Icon3 />{' '}
-          </Footer>
         </StMypageBottomWrap>
       </StMypageWrapper>
     </>
   );
 }
-
-const Footer = styled.footer`
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  border-top: 1px solid #ccc;
-  bottom: 0;
-`;
-const Icon = styled(FaInstagram)`
-  font-size: 25px;
-  top: 5px;
-  left: 40px;
-  cursor: pointer;
-`;
-
-const Icon2 = styled(FaFacebook)`
-  font-size: 25px;
-  top: 5px;
-  left: 40px;
-  cursor: pointer;
-`;
-
-const Icon3 = styled(FaFacebookMessenger)`
-  font-size: 25px;
-  top: 5px;
-  left: 40px;
-  cursor: pointer;
-`;
 
 const LeftColumn = styled.div`
   display: flex;
@@ -86,7 +52,7 @@ const RightColumn = styled.div`
 `;
 
 const StCalendarSection = styled.div`
-  width: 780px;
+  width: 700px;
   height: 200px;
   cursor: pointer;
 `;
@@ -107,17 +73,14 @@ const StMypageTopWrap = styled.div`
 
 const StPostingListTitle = styled.div`
   text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
   width: 40%;
-  border-top: 2px solid #ccc;
-  margin: 40px;
-  padding-top: 40px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 1rem;
 `;
 
 const StMypageBottomWrap = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 3rem;
+  padding-top: 2rem;
 `;

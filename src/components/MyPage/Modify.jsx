@@ -81,17 +81,13 @@ const StModify = styled.div`
   display: grid;
   grid-template-columns: 2fr 8fr;
   grid-template-rows: repeat(6, 1fr);
-  width: 55rem;
-  height: 23rem;
-  border: solid 4px black;
+  width: 50rem;
+  height: 20rem;
+  border: solid 1px black;
   position: relative;
   font-size: 1rem;
   gap: 3px;
-  background-color: #000000;
-  color: white;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 500;
-  font-style: normal;
+  background-color: #faf2e891;
 `;
 
 const Label = styled.p`
@@ -109,15 +105,12 @@ const StModifyButton = styled.button`
   grid-column: 1/3;
   justify-self: center;
   margin: 3px;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   border-radius: 15px;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 800;
-  font-style: normal;
   cursor: pointer;
   &:hover {
-    background-color: #ccc;
+    background-color: gray;
   }
 `;
 
@@ -126,7 +119,4 @@ const Stinput = styled.input`
   border: 0;
   font-size: 1rem;
   border-bottom: 1px solid;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 800;
-  font-style: normal;
 `;

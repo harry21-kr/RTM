@@ -1,30 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import MyPageHeader from './MyPage';
+import WriteHeader from './Modify';
 import { FaHome, FaInstagram, FaFacebook, FaFacebookMessenger } from 'react-icons/fa';
-import SiteLogo from '../../assets/SiteLogo.png';
-
-const LoginHeader = () => {
-  return (
-    <>
-      <StyledHeader>
-        <StLogo src={SiteLogo} alt="Profile" />
-      </StyledHeader>
-      <Footer>
-        {' '}
-        <Icon /> <Icon2 /> <Icon3 />{' '}
-      </Footer>
-    </>
-  );
-};
-
-export default LoginHeader;
-
-const StLogo = styled.img`
-  width: 650px;
-  height: 120px;
-  display: flex;
-  align-items: center;
-`;
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -35,12 +13,13 @@ const StyledHeader = styled.header`
   padding: 10px 0;
   border-bottom: 1px solid gray;
   height: 130px;
-  background-color: #000000;
 `;
 
 const Title = styled.p`
-  font-size: 50px;
-  font-weight: 700;
+  font-size: 40px;
+  position: absolute;
+  left: 140px;
+  font-weight: bold;
 `;
 
 const SubTitle = styled.p`
@@ -53,12 +32,10 @@ const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
   border-top: 1px solid black;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  position: absolute;
+  bottom: -800px;
+  gap: 30px;
 `;
 
 const Btns = styled.div`
@@ -106,3 +83,19 @@ const Icon3 = styled(FaFacebookMessenger)`
   left: 40px;
   cursor: pointer;
 `;
+
+const LoginHeader = () => {
+  return (
+    <>
+      <StyledHeader>
+        <Title>Login</Title>
+      </StyledHeader>
+      <Footer>
+        {' '}
+        <Icon /> <Icon2 /> <Icon3 />{' '}
+      </Footer>
+    </>
+  );
+};
+
+export default LoginHeader;
