@@ -1,16 +1,9 @@
-import { Navigate } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
-import WriteHeader from '../../components/Header/Modify';
 import Modify from '../../components/MyPage/Modify';
-import { useAuth } from '../../contexts/Auth/hooks';
+import WriteHeader from '../../components/Header/Modify';
 
 export default function ModifyPage() {
-  const { session } = useAuth();
-
-  if (!session) {
-    return <Navigate to="/login" replace />;
-  }
-
   return (
     <>
       <WriteHeader />

@@ -1,14 +1,14 @@
-import { Provider as ReduxProvider } from 'react-redux';
-import store from './Redux/Config/configureStore';
+import { Provider } from 'react-redux';
 import AuthProvider from './contexts/Auth/AuthContext';
 import ModalProvider from './contexts/Modal/ModalContext';
+import store from './Redux/Config/configureStore';
 
 export default function Providers({ children }) {
   return (
-    <ReduxProvider store={store}>
+    <Provider store={store}>
       <AuthProvider>
         <ModalProvider>{children}</ModalProvider>
       </AuthProvider>
-    </ReduxProvider>
+    </Provider>
   );
 }
