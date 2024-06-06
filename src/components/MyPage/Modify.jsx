@@ -92,7 +92,6 @@ const StModify = styled.div`
 const Label = styled.p`
   grid-column: 1;
   text-align: center;
-  font-weight: 600;
   border-right: 1px solid;
   border-bottom: 1px solid;
   align-content: center;

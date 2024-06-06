@@ -4,7 +4,6 @@ import Profile from '../../components/MyPage/Profile';
 import Modify from '../../components/MyPage/Modify';
 import styled from 'styled-components';
 import { PostingList } from '../../components/MyPage/PostingList';
-import { Calendar } from '../../components/MyPage/Calendar';
 
 export default function MyPage() {
   return (
@@ -12,15 +11,8 @@ export default function MyPage() {
       <MyPageHeader />
       <StMypageWrapper>
         <StMypageTopWrap>
-          <LeftColumn>
-            <Profile />
-            <StCalendarSection>
-              <Calendar />
-            </StCalendarSection>
-          </LeftColumn>
-          <RightColumn>
-            <Modify />
-          </RightColumn>
+          <Profile />
+          <Modify />
         </StMypageTopWrap>
         <StPostingListTitle>Posting List</StPostingListTitle>
         <StMypageBottomWrap>
@@ -30,25 +22,6 @@ export default function MyPage() {
     </>
   );
 }
-
-const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const StCalendarSection = styled.div`
-  width: 400px;
-  height: 150px;
-  cursor: pointer;
-`;
 
 const StMypageWrapper = styled.div`
   display: flex;
@@ -69,7 +42,7 @@ const StPostingListTitle = styled.div`
   font-size: 1.5rem;
   width: 40%;
   border-bottom: 2px solid #ccc;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem; // ::after의 bottom 위치를 맞추기 위해 추가
 `;
 
 const StMypageBottomWrap = styled.div`

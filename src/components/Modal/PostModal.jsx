@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../Redux/Slices/PostModalSlice';
-import { addPosts } from '../../Redux/Slices/PostsSlice';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function PostModal() {
   const [postTitle, setPostTitle] = useState('');
@@ -36,16 +34,16 @@ export default function PostModal() {
       data: { publicUrl }
     } = supabaseClient.storage.from('posts').getPublicUrl(imgData.path);
 
-    const newPost = {
-      id: uuidv4(),
+    const { error } = await supabaseClient.from('posts').insert({
       UID: session.user.user_metadata.userName,
       title: postTitle,
       content: postContent,
       img_url: publicUrl
-    };
-    // posts DB에 삽입
-    await supabaseClient.from('posts').insert(newPost);
-    dispatch(addPosts(newPost));
+    });
+
+    if (error) {
+      throw new Error(error);
+    }
 
     alert('포스팅 완료!');
     dispatch(closeModal());
