@@ -6,6 +6,7 @@ import MyPage from '../pages/MyPage/MyPage';
 
 export default function Router() {
   const { session } = useAuth();
+
   return (
     <BrowserRouter>
       <Routes>
