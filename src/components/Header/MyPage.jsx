@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
-import { useModal } from '../../contexts/Modal/useModal';
-import PostingModal from '../Modal/PostingModal';
+import { useNavigate } from 'react-router-dom';
+import PostModal from '../Modal/PostModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, openModal } from '../../Redux/Slices/PostModalSlice';
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -83,7 +84,8 @@ const MyPageHeader = () => {
   const [maintitle, setMainTitle] = useState();
   const { supabaseClient } = useAuth();
   const navigate = useNavigate();
-  const [openModal] = useModal(<PostingModal />);
+  const dispatch = useDispatch();
+  const modalOpen = useSelector((state) => state.modal.isOpen);
 
   const logOut = async () => {
     const { error } = await supabaseClient.auth.signOut();
@@ -146,7 +148,8 @@ const MyPageHeader = () => {
       <Title>{maintitle}</Title>
       <SubTitle>{subtitle}</SubTitle>
       <Btns>
-        <Button onClick={openModal}>Write</Button>
+        <Button onClick={() => dispatch(openModal())}>Write</Button>
+        {modalOpen && <PostModal />}
         <Button onClick={logOut}>Logout</Button>
       </Btns>
     </StyledHeader>

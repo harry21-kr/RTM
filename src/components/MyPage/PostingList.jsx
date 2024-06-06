@@ -1,14 +1,9 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useModal } from '../../contexts/Modal/useModal';
-import PostModal from '../Modal/PostModal';
 import UseFetchPosts from './hooks/UseFetchPosts';
+import { useSelector } from 'react-redux';
 
 export function PostingList() {
   const posts = useSelector((state) => state.posts.posts);
-  const [selectedPostData, setSelectedPostData] = useState({});
-  const [openModal] = useModal(<PostModal data={selectedPostData} />);
 
   UseFetchPosts(); // 커스텀 훅 호출
 
@@ -16,13 +11,7 @@ export function PostingList() {
     <>
       <StListWrap>
         {posts.map((post) => (
-          <StPostItem
-            key={post.id}
-            onClick={() => {
-              setSelectedPostData(post);
-              openModal();
-            }}
-          >
+          <StPostItem key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.content}</p>
             <img src={post.img_url} alt="post image"></img>

@@ -1,9 +1,10 @@
-import styled from 'styled-components';
 import MyPageHeader from '../../components/Header/MyPage';
-import { Calendar } from '../../components/MyPage/Calendar';
-import Modify from '../../components/MyPage/Modify';
-import { PostingList } from '../../components/MyPage/PostingList';
+import React from 'react';
 import Profile from '../../components/MyPage/Profile';
+import Modify from '../../components/MyPage/Modify';
+import styled from 'styled-components';
+import { PostingList } from '../../components/MyPage/PostingList';
+import { Calendar } from '../../components/MyPage/Calendar';
 
 export default function MyPage() {
   return (

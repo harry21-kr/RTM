@@ -1,11 +1,17 @@
-import { useCallback, useContext } from 'react';
-import { ModalContext } from './ModalContext';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { closeModal, openModal } from '../../Redux/Slices/PostModalSlice';
 
 export const useModal = (modalElement) => {
-  const { handleOpenModal, handleCloseModal } = useContext(ModalContext);
-  const handleOpenModalCallback = useCallback(() => {
-    handleOpenModal(modalElement);
-  }, [handleOpenModal, modalElement]);
+  const dispatch = useDispatch();
 
-  return [handleOpenModalCallback, handleCloseModal];
+  const handleOpenModal = useCallback(() => {
+    dispatch(openModal(modalElement));
+  }, [dispatch, modalElement]);
+
+  const handleCloseModal = useCallback(() => {
+    dispatch(closeModal());
+  }, [dispatch]);
+
+  return [handleOpenModal, handleCloseModal];
 };
