@@ -69,22 +69,24 @@ const MyPageHeader = () => {
   }, [supabaseClient]);
 
   return (
-    <StyledHeader>
-      <StTitleWrapper>
-        <Title>{maintitle}</Title>
-        <SubTitle>{subtitle}</SubTitle>
-      </StTitleWrapper>
-      <StProfileWrapper>
-        <Profile>
-          <img src={profile} alt="Profile" />
-        </Profile>
-        <Btns>
-          <Button onClick={openModal}>Write</Button>
-          <Button onClick={handleModify}>Modify</Button>
-          <Button onClick={logOut}>Logout</Button>
-        </Btns>
-      </StProfileWrapper>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <StTitleWrapper>
+          <Title>{maintitle}</Title>
+          <SubTitle>{subtitle}</SubTitle>
+        </StTitleWrapper>
+        <StProfileWrapper>
+          <Profile>
+            <img src={profile} alt="Profile" />
+          </Profile>
+          <Btns>
+            <Button onClick={openModal}>Write</Button>
+            <Button onClick={handleModify}>Modify</Button>
+            <Button onClick={logOut}>Logout</Button>
+          </Btns>
+        </StProfileWrapper>
+      </StyledHeader>
+    </>
   );
 };
 
@@ -95,7 +97,7 @@ const StProfileWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-right: 70px;
+  margin-right: 120px;
   gap: 10px;
 `;
 
@@ -104,37 +106,36 @@ const StTitleWrapper = styled.div`
   align-items: left;
   justify-content: center;
   flex-direction: column;
-  margin-left: 70px;
-  gap: 20px;
+  margin-left: 120px;
+  gap: 25px;
 `;
 
 const StyledHeader = styled.header`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  border-bottom: 1px solid gray;
-  height: 130px;
+  border-bottom: 1px solid #ccc;
+  height: 150px;
+  background-color: black;
 `;
 
 const Title = styled.p`
-  left: 140px;
   font-size: 50px;
   font-weight: 700;
+  color: white;
 `;
 
 const SubTitle = styled.p`
-  font-size: 16px;
-  left: 140px;
-  color: gray;
+  font-size: 20px;
+  color: #ccc;
 `;
 
 const Btns = styled.div`
   right: 250px;
   bottom: 5px;
   margin-bottom: 7px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 `;
 
 const Button = styled.button`
@@ -145,6 +146,7 @@ const Button = styled.button`
   margin: 0 3px;
   cursor: pointer;
   width: 100px;
+  color: white;
 
   &:hover {
     background-color: #808080;
@@ -170,5 +172,11 @@ const Profile = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    filter: grayscale(100%);
+
+    &:hover {
+      filter: grayscale(0%);
+    }
   }
 `;

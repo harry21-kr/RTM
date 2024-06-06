@@ -1,5 +1,5 @@
 import { useAuth } from '../../contexts/Auth/hooks';
-import WriteHeader from '../../components/Header/Modify';
+import WriteHeader from '../../components/Header/ModifyHeader';
 
 export default function WritePage() {
   const { supabaseClient, session } = useAuth();

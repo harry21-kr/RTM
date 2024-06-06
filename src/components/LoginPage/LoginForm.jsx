@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
 import LoginHeader from '../Header/Login';
-import MyPageHeader from '../Header/MyPage';
 import { addUserToTable } from '../MyPage/AddUserToTable';
 
 export function LoginForm() {

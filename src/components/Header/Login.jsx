@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import MyPageHeader from './MyPage';
-import WriteHeader from './Modify';
 import { FaHome, FaInstagram, FaFacebook, FaFacebookMessenger } from 'react-icons/fa';
 import SiteLogo from '../../assets/SiteLogo.png';
 

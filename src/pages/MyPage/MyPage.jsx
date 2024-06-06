@@ -5,6 +5,7 @@ import Modify from '../../components/MyPage/Modify';
 import styled from 'styled-components';
 import { PostingList } from '../../components/MyPage/PostingList';
 import { Calendar } from '../../components/MyPage/Calendar';
+import { FaInstagram, FaFacebook, FaFacebookMessenger } from 'react-icons/fa';
 
 export default function MyPage() {
   return (
@@ -16,7 +17,6 @@ export default function MyPage() {
             <Profile />
           </LeftColumn>
           <RightColumn>
-            {/* <Modify /> */}
             <StCalendarSection>
               <Calendar />
             </StCalendarSection>
@@ -25,11 +25,45 @@ export default function MyPage() {
         <StPostingListTitle>Posting List</StPostingListTitle>
         <StMypageBottomWrap>
           <PostingList />
+          <Footer>
+            {' '}
+            <Icon /> <Icon2 /> <Icon3 />{' '}
+          </Footer>
         </StMypageBottomWrap>
       </StMypageWrapper>
     </>
   );
 }
+
+const Footer = styled.footer`
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-top: 1px solid #ccc;
+  bottom: 0;
+`;
+const Icon = styled(FaInstagram)`
+  font-size: 25px;
+  top: 5px;
+  left: 40px;
+  cursor: pointer;
+`;
+
+const Icon2 = styled(FaFacebook)`
+  font-size: 25px;
+  top: 5px;
+  left: 40px;
+  cursor: pointer;
+`;
+
+const Icon3 = styled(FaFacebookMessenger)`
+  font-size: 25px;
+  top: 5px;
+  left: 40px;
+  cursor: pointer;
+`;
 
 const LeftColumn = styled.div`
   display: flex;
@@ -46,7 +80,7 @@ const RightColumn = styled.div`
 `;
 
 const StCalendarSection = styled.div`
-  width: 700px;
+  width: 780px;
   height: 200px;
   cursor: pointer;
 `;
@@ -67,14 +101,17 @@ const StMypageTopWrap = styled.div`
 
 const StPostingListTitle = styled.div`
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
   width: 40%;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 1rem;
+  border-top: 2px solid #ccc;
+  margin: 40px;
+  padding-top: 40px;
 `;
 
 const StMypageBottomWrap = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding-top: 2rem;
+  gap: 3rem;
 `;

@@ -23,6 +23,7 @@ const StListWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  background-color: beige;
+  background-color: black;
   padding: 20px;
+  width: 95rem;
 `;
