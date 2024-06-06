@@ -62,33 +62,27 @@ export default function PostingModal() {
       <label htmlFor="postImage">
         <StPrevImgWrapper>
           {previewUrl ? (
-            <StPrevImg src={previewUrl} alt="미리보기 이미지" width={360} height={200} />
+            <img src={previewUrl} alt="미리보기 이미지" width={360} height={180} />
           ) : (
-            <p>이미지를 추가해주세요.</p>
+            <p>이미지 가져오기</p>
           )}
         </StPrevImgWrapper>
       </label>
       <StFileInput type="file" id="postImage" accept="image/*" onChange={handleImageChange} />
-      <StInput
+      <input
         type="text"
         value={postTitle}
         placeholder="제목을 입력해주세요."
         onChange={(e) => setPostTitle(e.target.value)}
       />
-      <StInput
+      <input
         type="text"
         value={postContent}
-        placeholder="사진에 대한 간략한 글을 작성해주세요."
+        placeholder="간략한 소개글을 작성해주세요."
         onChange={(e) => setPostContent(e.target.value)}
       />
-      <StButtonWrapper>
-        <StButton type="submit" disabled={!postTitle || !postContent || !postImgFile}>
-          포스팅하기
-        </StButton>
-        <StButton type="button" onClick={closeModal}>
-          닫기
-        </StButton>
-      </StButtonWrapper>
+      <button type="submit">포스팅하기</button>
+      <button onClick={closeModal}>모달창 닫기</button>
     </StFormWrapper>
   );
 }
@@ -99,79 +93,29 @@ const StFormWrapper = styled.form`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 20px;
-
-  background-color: white;
+  background-color: #f8f9fa;
   padding: 32px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const StPrevImgWrapper = styled.div`
-  width: 360px;
+  width: 400px;
   height: 200px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
-  color: white;
   &:hover {
     opacity: 0.7;
-    color: black;
   }
-`;
-
-const StPrevImg = styled.img`
-  border-radius: 8px;
 `;
 
 const StFileInput = styled.input`
   display: none;
-`;
-
-const StInput = styled.input`
-  min-width: 260px;
-  height: 32px;
-  padding: 0px 12px;
-  border: 1px solid black;
-  border-radius: 6px;
-  outline: none;
-
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-  }
-`;
-
-const StButtonWrapper = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-const StButton = styled.button`
-  min-width: 80px;
-  height: 32px;
-
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  border-radius: 8px;
-  cursor: pointer;
-
-  transition: all 0.1s ease-in-out;
-
-  &:hover {
-    background-color: black;
-    color: white;
-  }
-
-  &:disabled {
-    opacity: 0.3;
-  }
 `;

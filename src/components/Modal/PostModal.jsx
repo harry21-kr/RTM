@@ -23,8 +23,8 @@ export default function PostModal({ post }) {
 
   const dispatch = useDispatch();
 
-  function handleToggleEditMode() {
-    setIsEditMode(!isEditMode);
+  function handleEnableEditMode() {
+    setIsEditMode(true);
   }
 
   async function handleEditPost() {
@@ -55,15 +55,15 @@ export default function PostModal({ post }) {
 
   return (
     <StModalWrapper>
-      <StImg src={prevImg_url} width={360} height={200} />
+      <img src={prevImg_url} width={200} height={200} />
       {isEditMode ? (
         <>
-          <StInput
+          <input
             type="text"
             value={editedData.title}
             onChange={(e) => setEditedData({ ...editedData, title: e.target.value })}
           />
-          <StInput
+          <input
             type="text"
             value={editedData.content}
             onChange={(e) => setEditedData({ ...editedData, content: e.target.value })}
@@ -71,20 +71,18 @@ export default function PostModal({ post }) {
         </>
       ) : (
         <>
-          <StTitle>{editedData.title}</StTitle>
+          <p>{editedData.title}</p>
           <p>{editedData.content}</p>
         </>
       )}
-      <StButtonWrapper>
-        <StButton
-          onClick={isEditMode ? handleEditPost : handleToggleEditMode}
-          disabled={isEditMode && prevTitle === editedData.title && prevContent === editedData.content}
-        >
-          수정하기
-        </StButton>
-        {!isEditMode && <StButton onClick={handleDeletePost}>삭제하기</StButton>}
-        <StButton onClick={isEditMode ? handleToggleEditMode : closeModal}>{isEditMode ? '취소' : '닫기'} </StButton>
-      </StButtonWrapper>
+      <button
+        onClick={isEditMode ? handleEditPost : handleEnableEditMode}
+        disabled={isEditMode && prevTitle === editedData.title && prevContent === editedData.content}
+      >
+        수정하기
+      </button>
+      <button onClick={handleDeletePost}>삭제하기</button>
+      <button onClick={closeModal}>모달 닫기</button>
     </StModalWrapper>
   );
 }
@@ -92,63 +90,12 @@ export default function PostModal({ post }) {
 const StModalWrapper = styled.div`
   width: 600px;
   height: 400px;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 20px;
-
-  background-color: white;
+  background-color: #f8f9fa;
   padding: 32px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const StImg = styled.img`
-  border-radius: 8px;
-`;
-
-const StTitle = styled.h3`
-  font-size: 24px;
-`;
-
-const StButtonWrapper = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-const StButton = styled.button`
-  min-width: 80px;
-  height: 32px;
-
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  border-radius: 8px;
-  cursor: pointer;
-
-  transition: all 0.1s ease-in-out;
-
-  &:hover {
-    background-color: black;
-    color: white;
-  }
-
-  &:disabled {
-    opacity: 0.3;
-  }
-`;
-
-const StInput = styled.input`
-  min-width: 260px;
-  height: 32px;
-  padding: 0px 12px;
-  border: 1px solid black;
-  border-radius: 6px;
-  outline: none;
-
-  &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-  }
 `;
