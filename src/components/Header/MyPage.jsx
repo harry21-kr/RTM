@@ -74,16 +74,11 @@ const MyPageHeader = () => {
     <StyledHeader>
       <Title>{maintitle}</Title>
       <SubTitle>{subtitle}</SubTitle>
-      <StProfileWrapper>
-        <Profile>
-          <img src={profile} alt="Profile" />
-        </Profile>
-        <Btns>
-          <Button onClick={openModal}>Write</Button>
-          <Button onClick={handleModify}>Modify</Button>
-          <Button onClick={logOut}>Logout</Button>
-        </Btns>
-      </StProfileWrapper>
+      <Btns>
+        <Button onClick={openModal}>Write</Button>
+        <Button onClick={handleModify}>Modify</Button>
+        <Button onClick={logOut}>Logout</Button>
+      </Btns>
     </StyledHeader>
   );
 };

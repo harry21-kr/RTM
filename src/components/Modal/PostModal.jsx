@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useModal } from '../../contexts/Modal/useModal';
 
-export default function PostModal({ data }) {
-  const { id: prevId, title: prevTitle, content: prevContent, img_url: prevImg_url, created_at: prevCreated_at } = data;
+export default function PostModal({ post }) {
+  const { id: prevId, title: prevTitle, content: prevContent, img_url: prevImg_url, created_at: prevCreated_at } = post;
 
   const { supabaseClient } = useAuth();
 
@@ -34,7 +34,7 @@ export default function PostModal({ data }) {
       }
       alert('수정이 완료되었습니다.');
     } else {
-      setEditedData(data);
+      setEditedData(post);
     }
     setIsEditMode(false);
   }
