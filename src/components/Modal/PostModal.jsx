@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { deletePost, editPost } from '../../Redux/Slices/PostsSlice';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useModal } from '../../contexts/Modal/useModal';
 
@@ -21,8 +19,6 @@ export default function PostModal({ post }) {
 
   const [_, closeModal] = useModal();
 
-  const dispatch = useDispatch();
-
   function handleEnableEditMode() {
     setIsEditMode(true);
   }
@@ -36,7 +32,6 @@ export default function PostModal({ post }) {
       if (error) {
         throw new Error(error);
       }
-      dispatch(editPost(editedData));
       alert('수정이 완료되었습니다.');
     } else {
       setEditedData(post);
@@ -47,7 +42,6 @@ export default function PostModal({ post }) {
   async function handleDeletePost() {
     if (confirm('정말 게시물을 삭제하시겠어요?')) {
       await supabaseClient.from('posts').delete().eq('id', prevId);
-      dispatch(deletePost({ id: prevId }));
       alert('삭제가 완료되었습니다.');
       closeModal();
     }

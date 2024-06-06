@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { addPost } from '../../Redux/Slices/PostsSlice';
+import { addPosts } from '../../Redux/Slices/PostsSlice';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useModal } from '../../contexts/Modal/useModal';
 
@@ -52,7 +52,7 @@ export default function PostingModal() {
       throw new Error(error);
     }
 
-    dispatch(addPost(newPost));
+    dispatch(addPosts(newPost));
     alert('포스팅 완료!');
     closeModal();
   }
