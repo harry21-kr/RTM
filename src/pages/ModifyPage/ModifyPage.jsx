@@ -1,10 +1,17 @@
-import React from 'react';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Modify from '../../components/MyPage/Modify';
-import ModifyHeader from '../../components/Header/ModifyHeader';
 import film from '../../assets/background2.png';
+import ModifyHeader from '../../components/Header/ModifyHeader';
+import Modify from '../../components/MyPage/Modify';
+import { useAuth } from '../../contexts/Auth/hooks';
 
 export default function ModifyPage() {
+  const { session } = useAuth();
+
+  if (!session) {
+    return <Navigate to="/login" replace />;
+  }
+
   return (
     <>
       <ModifyHeader />

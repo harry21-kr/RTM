@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { addPosts } from '../../Redux/Slices/PostsSlice';
+import { addPost } from '../../Redux/Slices/PostsSlice';
 import { useAuth } from '../../contexts/Auth/hooks';
 import { useModal } from '../../contexts/Modal/useModal';
 
@@ -52,7 +52,7 @@ export default function PostingModal() {
       throw new Error(error);
     }
 
-    dispatch(addPosts(newPost));
+    dispatch(addPost(newPost));
     alert('포스팅 완료!');
     closeModal();
   }
@@ -62,27 +62,33 @@ export default function PostingModal() {
       <label htmlFor="postImage">
         <StPrevImgWrapper>
           {previewUrl ? (
-            <img src={previewUrl} alt="미리보기 이미지" width={360} height={180} />
+            <StPrevImg src={previewUrl} alt="미리보기 이미지" width={360} height={200} />
           ) : (
-            <p>이미지 가져오기</p>
+            <p>이미지를 추가해주세요.</p>
           )}
         </StPrevImgWrapper>
       </label>
       <StFileInput type="file" id="postImage" accept="image/*" onChange={handleImageChange} />
-      <input
+      <StInput
         type="text"
         value={postTitle}
         placeholder="제목을 입력해주세요."
         onChange={(e) => setPostTitle(e.target.value)}
       />
-      <input
+      <StInput
         type="text"
         value={postContent}
-        placeholder="간략한 소개글을 작성해주세요."
+        placeholder="사진에 대한 간략한 글을 작성해주세요."
         onChange={(e) => setPostContent(e.target.value)}
       />
-      <button type="submit">포스팅하기</button>
-      <button onClick={closeModal}>모달창 닫기</button>
+      <StButtonWrapper>
+        <StButton type="submit" disabled={!postTitle || !postContent || !postImgFile}>
+          포스팅하기
+        </StButton>
+        <StButton type="button" onClick={closeModal}>
+          닫기
+        </StButton>
+      </StButtonWrapper>
     </StFormWrapper>
   );
 }
@@ -93,29 +99,79 @@ const StFormWrapper = styled.form`
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 20px;
-  background-color: #f8f9fa;
+
+  background-color: white;
   padding: 32px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const StPrevImgWrapper = styled.div`
-  width: 400px;
+  width: 360px;
   height: 200px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
+  color: white;
   &:hover {
     opacity: 0.7;
+    color: black;
   }
+`;
+
+const StPrevImg = styled.img`
+  border-radius: 8px;
 `;
 
 const StFileInput = styled.input`
   display: none;
+`;
+
+const StInput = styled.input`
+  min-width: 260px;
+  height: 32px;
+  padding: 0px 12px;
+  border: 1px solid black;
+  border-radius: 6px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const StButtonWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const StButton = styled.button`
+  min-width: 80px;
+  height: 32px;
+
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+  }
 `;
