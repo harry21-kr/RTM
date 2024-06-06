@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
-import { addUserToTable } from '../MyPage/AddUserToTable';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -15,7 +14,7 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   async function handleSignUp(email, password) {
-    const { data, error } = await supabaseClient.auth.signUp({
+    const { error } = await supabaseClient.auth.signUp({
       email: email,
       password: password,
       options: { data: { userName: email.split('@')[0] } }
@@ -23,13 +22,10 @@ export function LoginForm() {
 
     if (error) {
       setIsFailedLogin(true);
-      console.error('Sign up error:', error.message);
-      throw new Error(error.message);
-    } else if (data) {
-      alert('성공적으로 회원가입 되었습니다!');
-      console.log(data);
-      await addUserToTable(supabaseClient, data.user, password); // user 객체에서 id 사용, password 넘겨주기
+      throw new Error(error);
     }
+
+    alert('성공적으로 회원가입 되었습니다!');
   }
 
   async function handleLogin(email, password) {
@@ -40,7 +36,7 @@ export function LoginForm() {
 
     if (error) {
       setIsFailedLogin(true);
-      throw new Error(error.message);
+      throw new Error(error);
     }
 
     alert('성공적으로 로그인 되었습니다!');
