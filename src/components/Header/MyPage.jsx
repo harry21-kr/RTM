@@ -58,11 +58,9 @@ const MyPageHeader = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
-      console.log('sessionData3 => ', sessionData);
       const userId = sessionData.session.user.id;
 
       const { data: userData, error: userError } = await supabaseClient.from('users').select().eq('id', userId);
-      console.log('셋 유저 데이터3 ==> ', userData);
       const SiteTitle = userData[0].siteName;
 
       setMainTitle(SiteTitle);
@@ -72,53 +70,67 @@ const MyPageHeader = () => {
 
   return (
     <StyledHeader>
-      <Title>{maintitle}</Title>
-      <SubTitle>{subtitle}</SubTitle>
-      <Btns>
-        <Button onClick={openModal}>Write</Button>
-        <Button onClick={handleModify}>Modify</Button>
-        <Button onClick={logOut}>Logout</Button>
-      </Btns>
+      <StTitleWrapper>
+        <Title>{maintitle}</Title>
+        <SubTitle>{subtitle}</SubTitle>
+      </StTitleWrapper>
+      <StProfileWrapper>
+        <Profile>
+          <img src={profile} alt="Profile" />
+        </Profile>
+        <Btns>
+          <Button onClick={openModal}>Write</Button>
+          <Button onClick={handleModify}>Modify</Button>
+          <Button onClick={logOut}>Logout</Button>
+        </Btns>
+      </StProfileWrapper>
     </StyledHeader>
   );
 };
 
 export default MyPageHeader;
+
 const StProfileWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-right: 70px;
+  gap: 10px;
+`;
+
+const StTitleWrapper = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 70px;
+  gap: 20px;
 `;
 
 const StyledHeader = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 10px 0;
+  justify-content: space-between;
+  padding: 10px;
   border-bottom: 1px solid gray;
   height: 130px;
 `;
 
 const Title = styled.p`
-  position: absolute;
-  font-size: 40px;
   left: 140px;
-  font-weight: bold;
+  font-size: 50px;
+  font-weight: 700;
 `;
 
 const SubTitle = styled.p`
   font-size: 16px;
-  position: absolute;
-  left: 145px;
-  bottom: 15px;
+  left: 140px;
   color: gray;
 `;
 
 const Btns = styled.div`
-  /* position: absolute; */
   right: 250px;
   bottom: 5px;
   margin-bottom: 7px;
@@ -127,7 +139,6 @@ const Btns = styled.div`
 
 const Button = styled.button`
   background-color: transparent;
-  /* border: 1px solid black; */
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
@@ -147,7 +158,6 @@ const Button = styled.button`
 `;
 
 const Profile = styled.div`
-  /* position: absolute; */
   right: 332px;
   top: 25px;
   width: 50px;
