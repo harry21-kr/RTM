@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/Auth/hooks';
 import LoginHeader from '../Header/Login';
-import MyPageHeader from '../Header/MyPage';
 import { addUserToTable } from '../MyPage/AddUserToTable';
 
 export function LoginForm() {
@@ -12,7 +11,7 @@ export function LoginForm() {
   const [mode, setMode] = useState('login');
   const [isFailedLogin, setIsFailedLogin] = useState(false);
 
-  const { session, supabaseClient } = useAuth();
+  const { supabaseClient } = useAuth();
 
   const navigate = useNavigate();
 
@@ -47,14 +46,6 @@ export function LoginForm() {
 
     alert('성공적으로 로그인 되었습니다!');
   }
-
-  useEffect(() => {
-    if (session) {
-      navigate(`/${session.user.user_metadata.userName}/posts`, { replace: true });
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session]);
 
   return (
     <>
