@@ -1,4 +1,5 @@
 # RTM (Record The Moment)
+
 ![Logo white](https://github.com/harry21-kr/RTM/assets/166012944/7dff6169-cb3a-45fd-b66d-c744535959e2)
 
 ## 🖥️ 프로젝트 소개
@@ -41,6 +42,7 @@
 <br>
 
 ## 📝 와이어프레임
+
 - LogIn page
 <img src="https://github.com/harry21-kr/RTM/assets/166012944/aa90f66b-9ef9-4583-9e82-f4064dea03b6" width="600" height="400">
 
